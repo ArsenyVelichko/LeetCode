@@ -7,7 +7,7 @@
 ```C++
 bool CompareIntervalBegins(vector<int>& a, vector<int>& b) {
        return (a[0] < b[0]);
-    }
+}
 class Solution {
 public:    
     int eraseOverlapIntervals(vector<vector<int>>& intervals) {
