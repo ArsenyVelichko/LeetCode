@@ -2,6 +2,7 @@
 
 + [Two Sum](#two-sum)
 + [3Sum](#3sum)
++ [Subarray Sum Equals K](#subarray-sum-equals-k)
 
 ## Two Sum
 
@@ -57,6 +58,34 @@ public:
           i++;
       }
       return res;
+    }
+};
+```
+
+## Subarray Sum Equals K
+
+https://leetcode.com/problems/subarray-sum-equals-k/
+
+```C++
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+      map<int, int> sums;
+      map<int, int>::iterator ptr;
+      int count = 0;
+      int currentSum = 0;
+      sums.insert(pair<int, int>(0, 1));
+      for (int i = 0; i < nums.size(); i++) {
+        currentSum += nums[i];
+        int requiredSum = currentSum - k;
+        if ((ptr = sums.find(requiredSum)) != sums.end())
+          count += ptr->second;
+        if ((ptr = sums.find(currentSum)) != sums.end())
+          ptr->second++;
+        else
+          sums.insert(pair<int, int>(currentSum, 1));
+      }
+      return count;
     }
 };
 ```
