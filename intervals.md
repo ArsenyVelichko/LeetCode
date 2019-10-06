@@ -2,6 +2,7 @@
 
 + [Non-overlapping Intervals](#non-overlapping-intervals)
 + [Merge Intervals](#merge-intervals)
++ [Insert Interval](#insert-interval)
 
 ## Non-overlapping Intervals
 
@@ -61,6 +62,49 @@ public:
         }
       intervals[beginIndex][1] = currentEnd;
       return intervals;
+    }
+};
+```
+
+## Insert Interval
+
+https://leetcode.com/problems/insert-interval/
+
+```C++
+class Solution {
+public:
+    int BinarySearch(vector<vector<int>>& intervals, int num, int index){
+      int start = -1;
+      int end = intervals.size();
+      while (start < end - 1) {
+        int mid = (start + end) / 2;        
+        if (intervals[mid][index] < num)
+          start = mid;
+        else if (intervals[mid][index] > num)
+          end = mid;
+        else
+          return mid + !index;
+      }
+      return end;
+    }
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+        vector<vector<int>>::iterator beginIter = intervals.begin();
+        int beginToErase = BinarySearch(intervals, newInterval[0], 1);
+        int endToErase = BinarySearch(intervals, newInterval[1], 0);
+        if (beginToErase == intervals.size()) {
+          intervals.push_back(newInterval);
+          return intervals;
+        } else if (endToErase == 0) {
+          intervals.insert(beginIter, newInterval);
+          return intervals;
+        }
+        if (intervals[beginToErase][0] < newInterval[0])
+          newInterval[0] = intervals[beginToErase][0];
+        if (intervals[endToErase - 1][1] > newInterval[1])
+          newInterval[1] = intervals[endToErase - 1][1];
+        intervals.erase(beginIter + beginToErase, beginIter + endToErase);
+        intervals.insert(beginIter + beginToErase, newInterval);
+        return intervals;
     }
 };
 ```
