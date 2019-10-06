@@ -19,3 +19,35 @@ public:
     }
 };
 ```
+
+### Recursively
+
+```C++
+class Solution {
+public:
+    int fib(int N) {
+        if (N <= 1)
+          return N;
+        return fib(N - 2) + fib(N - 1);
+    }
+};
+```
+
+### Recursively with memoization
+
+```C++
+class Solution {
+private:
+  int cache[31] = {0};
+public:
+    int fib(int N) {
+      if (N <= 1)
+        return N;
+      if (cache[N] != 0)
+        return cache[N];      
+      return cache[N] = fib(N - 1) + fib(N - 2);    
+    }
+};
+```
+
+
