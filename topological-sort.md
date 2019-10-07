@@ -1,6 +1,6 @@
 # Topological sort
 
-+ [Two Sum](#two-sum)
++ [Course Schedule](#course-schedule)
 
 ## Course Schedule
 
