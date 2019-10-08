@@ -153,9 +153,7 @@ public:
         orderStack = ReverseStr(orderStack);
         for (i = 0; i < 26; i++)
           if (indegree[i] == 0) {
-              cout << i +'a';
              size_t index = BinarySearch(orderStack, i + 'a');
-             cout <<index;
              orderStack.insert(index + orderStack.begin(), i + 'a');
           }
         return orderStack;
