@@ -42,14 +42,18 @@ public:
 ```C++
 class Solution {
 private:
-  int cache[31] = {0};
+  vector<int> cache;
 public:
-    int fib(int N) {
+    int SearchFibNumber(int N) {
       if (N <= 1)
         return N;
       if (cache[N] != 0)
         return cache[N];      
-      return cache[N] = fib(N - 1) + fib(N - 2);    
+      return cache[N] = fib(N - 1) + fib(N - 2);  
+    }
+    int fib(int N) {
+      cache.resize(N + 1, 0);
+      return SearchFibNumber(N);
     }
 };
 ```
