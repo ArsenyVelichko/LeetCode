@@ -78,9 +78,9 @@ public:
       for (int i = 0; i < nums.size(); i++) {
         currentSum += nums[i];
         int requiredSum = currentSum - k;
-        if ((searchIter = subArrMap.find(requiredSum)) != sums.end())
-          count += ptr->second;
-        if ((searchIter = subArrMap.find(currentSum)) != sums.end())
+        if ((searchIter = subArrMap.find(requiredSum)) != subArrMap.end())
+          count += searchIter->second;
+        if ((searchIter = subArrMap.find(currentSum)) != subArrMap.end())
           searchIter->second++;
         else
           subArrMap.insert(pair<int, int>(currentSum, 1));
