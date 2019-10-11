@@ -16,9 +16,9 @@ public:
       map<int, int>::iterator searchIter;
       for (int i = 0; i < nums.size(); i++) {
         int secondNum = target - nums[i];
-        if ((searchIter = hashTable.find(secondNum)) != hashTable.end())
+        if ((searchIter = numberMap.find(secondNum)) != numberMap.end())
           return vector<int> {searchIter->second, i};
-        hashTable.insert(pair<int, int>(nums[i], i));
+        numberMap.insert(pair<int, int>(nums[i], i));
       }
       return vector<int> (0);
     }
