@@ -121,15 +121,32 @@ public:
             }
         }
     }
+    int BinarySearch(string str, char a) {
+        int begin = -1;
+        int end = str.size();
+        while (begin < end - 1) {
+            int mid = (end + begin) / 2;
+            if (str[mid] < a)
+              begin = mid;
+            else
+              end = mid;
+        }
+        return end;
+    }
     string alienOrder(vector<string> &words) {
         graph.resize(26, vector<int>());
         topStatuses.resize(26, -1);
         int i;
         BuidGraph(words);
         for (i = 0; i < 26; i++)
-          if (topStatuses[i] == 0)
+          if (graph[i].size() && topStatuses[i] == 0)
             if (DeepFirstSearch(i))
               return string();
+        for (i = 0; i < 26; i++)
+          if (topStatuses[i] == 0) {
+             size_t index = BinarySearch(orderStack, i + 'a');
+             orderStack.insert(index + orderStack.begin(), i + 'a');
+          }
         return orderStack;
     }
 };
