@@ -1,6 +1,6 @@
 # Trees
 
-+[Binary Tree Inorder Traversal](#binary-tree-inorder-traversal)
++ [Binary Tree Inorder Traversal](#binary-tree-inorder-traversal)
 
 ## Binary Tree Inorder Traversal
 
