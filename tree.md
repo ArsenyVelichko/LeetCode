@@ -2,6 +2,7 @@
 
 + [Binary Tree Inorder Traversal](#binary-tree-inorder-traversal)
 + [Symmetric Tree](#symmetric-tree)
++ [Maximum Depth of Binary Tree](#maximum-depth-of-binary-tree)
 
 ## Binary Tree Inorder Traversal
 
@@ -71,6 +72,24 @@ public:
     }
     bool isSymmetric(TreeNode* root) {
        return isEqual(root, root);
+    }
+};
+```
+
+## Maximum Depth of Binary Tree
+
+https://leetcode.com/problems/maximum-depth-of-binary-tree/
+
+```C++
+class Solution {
+public:
+    int SearchBottom(TreeNode* node, int depth) {
+      if (!node)
+        return depth;
+      return max(SearchBottom(node->left, depth + 1), SearchBottom(node->right, depth + 1));
+    }
+    int maxDepth(TreeNode* root) {
+        return SearchBottom(root, 0);
     }
 };
 ```
