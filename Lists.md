@@ -366,31 +366,18 @@ https://leetcode.com/problems/intersection-of-two-linked-lists/
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        ListNode* buf1 = headA,* buf2 = headB;
-        ListNode* lastNode = NULL;
-        if (buf1 == NULL || buf2 == NULL)
-          return NULL;
-        while (buf1 != buf2) {
-          if (buf1->next == NULL) {
-            if (lastNode) {
-              if (buf1 != lastNode)
-                return NULL;
-            } else
-              lastNode = buf1;
-            buf1 = headB;
-          } else
-            buf1 = buf1->next;
-          if (buf2->next == NULL) {
-            if (lastNode) {
-              if (buf2 != lastNode)
-                return NULL;
-            } else
-              lastNode = buf2;
-            buf2 = headA;
-          } else             
-              buf2 = buf2->next;
+        ListNode* tmp1 = headA,* tmp2 = headB;
+        while (tmp1 != tmp2) {
+          if (!tmp1)
+            tmp1 = headB;
+          else
+            tmp1 = tmp1->next;
+          if (!tmp2)
+            tmp2 = headA;
+          else
+            tmp2 = tmp2->next;
         }        
-        return buf1;
+        return tmp1;
     }
 };
 ```
