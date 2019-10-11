@@ -115,31 +115,11 @@ public:
             for (j = 0; j < words[i].size(); j++) {
               topStatuses[words[i][j] - 'a'] = 0;
               if (!isEdgeBuilt && words[i][j] != words[i + 1][j]) {
-                graph[words[i][j] - 'a'].push_back(words[i + 1][j] - 'a');
+                graph[words[i + 1][j] - 'a'].push_back(words[i][j] - 'a');
                 isEdgeBuilt = true;
               }
             }
         }
-    }
-    string ReverseStr(string str) {
-        for (int i = 0, j = str.size() - 1; i < j; i++, j--) {
-            char buf = str[i];
-            str[i] = str[j];
-            str[j] = buf;
-        }
-        return str;
-    }
-    int BinarySearch(string str, char a) {
-        int begin = -1;
-        int end = str.size();
-        while (begin < end - 1) {
-            int mid = (end + begin) / 2;
-            if (str[mid] < a)
-              begin = mid;
-            else
-              end = mid;
-        }
-        return end;
     }
     string alienOrder(vector<string> &words) {
         graph.resize(26, vector<int>());
@@ -147,15 +127,9 @@ public:
         int i;
         BuidGraph(words);
         for (i = 0; i < 26; i++)
-          if (graph[i].size() && topStatuses[i] == 0)
+          if (topStatuses[i] == 0)
             if (DeepFirstSearch(i))
               return string();
-        orderStack = ReverseStr(orderStack);
-        for (i = 0; i < 26; i++)
-          if (topStatuses[i] == 0) {
-             size_t index = BinarySearch(orderStack, i + 'a');
-             orderStack.insert(index + orderStack.begin(), i + 'a');
-          }
         return orderStack;
     }
 };
