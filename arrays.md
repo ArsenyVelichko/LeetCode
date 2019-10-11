@@ -70,17 +70,17 @@ https://leetcode.com/problems/subarray-sum-equals-k/
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
-      map<int, int> sums;
+      map<int, int> subArrMap;
       map<int, int>::iterator searchIter;
       int count = 0;
       int currentSum = 0;
-      sums.insert(pair<int, int>(0, 1));
+      subArrMap.insert(pair<int, int>(0, 1));
       for (int i = 0; i < nums.size(); i++) {
         currentSum += nums[i];
         int requiredSum = currentSum - k;
-        if ((searchIter = sums.find(requiredSum)) != sums.end())
+        if ((searchIter = subArrMap.find(requiredSum)) != sums.end())
           count += ptr->second;
-        if ((searchIter = sums.find(currentSum)) != sums.end())
+        if ((searchIter = subArrMap.find(currentSum)) != sums.end())
           searchIter->second++;
         else
           sums.insert(pair<int, int>(currentSum, 1));
