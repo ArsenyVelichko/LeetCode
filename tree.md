@@ -5,6 +5,7 @@
 + [Maximum Depth of Binary Tree](#maximum-depth-of-binary-tree)
 + [Same Tree](#same-tree)
 + [Invert Binary Tree](#invert-binary-tree)
++ [Path Sum](#path-sum)
 
 ## Binary Tree Inorder Traversal
 
@@ -129,6 +130,27 @@ public:
         root->right = tmp;
       }
       return root;
+    }
+};
+```
+
+## Path Sum
+
+https://leetcode.com/problems/path-sum/
+
+```C++
+class Solution {
+public:
+    bool hasPathSum(TreeNode* root, int sum) {
+      if (root) {
+        if (!root->left && !root->right && sum - root->val == 0)
+          return true;
+        else if (!hasPathSum(root->left, sum - root->val))
+          return hasPathSum(root->right, sum - root->val);
+        else
+          return true;
+      }
+      return false;
     }
 };
 ```
