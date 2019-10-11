@@ -4,6 +4,7 @@
 + [Symmetric Tree](#symmetric-tree)
 + [Maximum Depth of Binary Tree](#maximum-depth-of-binary-tree)
 + [Same Tree](#same-tree)
++ [Invert Binary Tree](#invert-binary-tree)
 
 ## Binary Tree Inorder Traversal
 
@@ -110,6 +111,24 @@ public:
         return (p->val == q->val) &&
           isSameTree(p->left, q->left) &&
           isSameTree(p->right, q->right);
+    }
+};
+```
+
+## Invert Binary Tree
+
+https://leetcode.com/problems/invert-binary-tree/
+
+```C++
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+      if (root) {      
+        TreeNode* tmp = invertTree(root->left);
+        root->left = invertTree(root->right);
+        root->right = tmp;
+      }
+      return root;
     }
 };
 ```
