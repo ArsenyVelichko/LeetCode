@@ -47,23 +47,23 @@ https://leetcode.com/problems/merge-two-sorted-lists/
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-      ListNode res(0), *ptr = &res;
+      ListNode tmp(0), *addTo = &tmp;
       while (l1 != NULL && l2 != NULL) {
         if (l1->val < l2->val) {
-          ptr->next = l1;
+          addTo->next = l1;
           l1 = l1->next;
         } else {
-          ptr->next = l2;
+          addTo->next = l2;
           l2 = l2->next;
         }
-        ptr = ptr->next;
+        addTo = addTo->next;
       }
       if (l1 != NULL) {
-        ptr->next = l1;
+        addTo->next = l1;
       } else {
-        ptr->next = l2;
+        addTo->next = l2;
       }
-      return res.next;
+      return tmp.next;
     }
 };
 ```
@@ -76,15 +76,15 @@ https://leetcode.com/problems/linked-list-cycle/
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        ListNode* hare, *tortoise = head;
+        ListNode* fastPtr, *slowPtr = head;
         if (!head)
             return false;
-        hare = head->next;
-        while (tortoise != hare) {
-          if (hare == NULL || hare->next == NULL)
+        fastPtr = head->next;
+        while (slowPtr != fastPtr) {
+          if (fastPtr == NULL || fastPtr->next == NULL)
             return false;
-          tortoise = tortoise->next;
-          hare = hare->next->next;
+          slowPtr = slowPtr->next;
+          fastPtr = fastPtr->next->next;
         }
         return true;
     }
@@ -99,23 +99,23 @@ https://leetcode.com/problems/linked-list-cycle-ii/
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        ListNode* hare, *tortoise = head;
+        ListNode* fastPtr, *slowPtr = head;
         if (!head)
             return NULL;
-        hare = head->next;
-        while (tortoise != hare) {
-          if (hare == NULL || hare->next == NULL)
+        fastPtr = head->next;
+        while (slowPtr != fastPtr) {
+          if (fastPtr == NULL || fastPtr->next == NULL)
             return NULL;
-          tortoise = tortoise->next;
-          hare = hare->next->next;
+          slowPtr = slowPtr->next;
+          fastPtr = fastPtr->next->next;
         }
-      tortoise = head;
-      hare = hare->next;
-      while (tortoise != hare) {
-        tortoise = tortoise->next;
-        hare = hare->next;
+      slowPtr = head;
+      fastPtr = fastPtr->next;
+      while (slowPtr != fastPtr) {
+        slowPtr = slowPtr->next;
+        fastPtr = fastPtr->next;
       }
-      return tortoise;
+      return slowPtr;
     }
 };
 ```
@@ -170,23 +170,23 @@ public:
 ```C++
 class Solution {
 public:
-  void foo(ListNode* a, ListNode** AddTo) {
-    if (a->next != NULL)
-      foo(a->next, AddTo);
-    if (*AddTo != NULL) {     
-      a->next = (*AddTo)->next;
-      (*AddTo)->next = a;
-      *AddTo = a->next;
-      if (*AddTo == a) {
-        (*AddTo)->next = NULL;
-        *AddTo = NULL;
+  void RecursiveReorder(ListNode* currNode, ListNode** addTo) {
+    if (currNode->next != NULL)
+      RecursiveReorder(currNode->next, addTo);
+    if (*addTo != NULL) {     
+      currNode->next = (*addTo)->next;
+      (*addTo)->next = currNode;
+      *addTo = currNode->next;
+      if (*addTo == currNode) {  //Дошли до середины 
+        (*addTo)->next = NULL;
+        *addTo = NULL;  //Зануляем, чтобы прекратить добавление
       }
     }      
   }
   void reorderList(ListNode* head) {
-    ListNode* AddTo = head;
+    ListNode* addTo = head;
     if (head != NULL)
-      foo(head, &AddTo);
+      RecursiveReorder(head, &addTo);
   }
 };
 ```
@@ -212,23 +212,23 @@ public:
       return fastPtr;
     }
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        ListNode res(0), *ptr = &res;
+        ListNode tmp(0), *addTo = &tmp;
       while (l1 != NULL && l2 != NULL) {
         if (l1->val < l2->val) {
-          ptr->next = l1;
+          addTo->next = l1;
           l1 = l1->next;
         } else {
-          ptr->next = l2;
+          addTo->next = l2;
           l2 = l2->next;
         }
-        ptr = ptr->next;
+        addTo = ptr->next;
       }
       if (l1 != NULL) {
-        ptr->next = l1;
+        addTo->next = l1;
       } else {
-        ptr->next = l2;
+        addTo->next = l2;
       }
-      return res.next;
+      return tmp.next;
     }
     ListNode* sortList(ListNode* head) {
         if (head == NULL)
@@ -291,24 +291,24 @@ https://leetcode.com/problems/palindrome-linked-list/
 ```C++
 class Solution {
 public:
-  void foo(ListNode* a, ListNode** AddTo) {
-    if (a->next != NULL)
-      foo(a->next, AddTo);
-    if (*AddTo != NULL) {     
-      a->next = (*AddTo)->next;
-      (*AddTo)->next = a;
-      *AddTo = a->next;
-      if (*AddTo == a) {
-        (*AddTo)->next = NULL;
-        *AddTo = NULL;
+  void RecursiveReorder(ListNode* currNode, ListNode** addTo) {
+    if (currNode->next != NULL)
+      RecursiveReorder(currNode->next, addTo);
+    if (*addTo != NULL) {     
+      currNode->next = (*addTo)->next;
+      (*addTo)->next = currNode;
+      *addTo = currNode->next;
+      if (*addTo == currNode) {  //Дошли до середины 
+        (*addTo)->next = NULL;
+        *addTo = NULL;  //Зануляем, чтобы прекратить добавление
       }
     }      
   }
   bool isPalindrome(ListNode* head) {
-    ListNode* AddTo = head;
+    ListNode* addTo = head;
     if (head == NULL)
       return true;    
-    foo(head, &AddTo);
+    RecursiveReorder(head, &addTo);
     do {
     if (head->next == NULL)
       return true;
