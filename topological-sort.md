@@ -12,29 +12,29 @@ https://leetcode.com/problems/course-schedule/
 class Solution {
 private:
   vector<vector<int>> graph;
-  vector<int> indegree;
+  vector<int> topStatuses;
 public:
     bool DeepFirstSearch(int top) {
-      indegree[top] = 1;
+      topStatuses[top] = 1;
       for (int i = 0; i < graph[top].size(); i++) {
         int next = graph[top][i];
-        if (indegree[next] == 0) {
+        if (topStatuses[next] == 0) {
           if (DeepFirstSearch(next))
             return true;
-        } else if (indegree[next] == 1)
+        } else if (topStatuses[next] == 1)
           return true;    
       }
-      indegree[top] = 2;
+      topStatuses[top] = 2;
       return false;
     }
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         graph.resize(numCourses, vector<int>());
-        indegree.resize(numCourses, 0);
+        topStatuses.resize(numCourses, 0);
         int i;
         for (i = 0; i < prerequisites.size(); i++)
           graph[prerequisites[i][0]].push_back(prerequisites[i][1]);
         for (i = 0; i < numCourses; i++)
-          if (indegree[i] == 0)
+          if (topStatuses[i] == 0)
             if (DeepFirstSearch(i))
               return false;
         return true;
@@ -50,31 +50,31 @@ https://leetcode.com/problems/course-schedule-ii/submissions/
 class Solution {
 private:
   vector<vector<int>> graph;
-  vector<int> indegree;
+  vector<int> topStatuses;
   vector<int> orderStack;
 public:
     bool DeepFirstSearch(int top) {
-      indegree[top] = 1;
+      topStatuses[top] = 1;
       for (int i = 0; i < graph[top].size(); i++) {
         int next = graph[top][i];
-        if (indegree[next] == 0) {
+        if (topStatuses[next] == 0) {
           if (DeepFirstSearch(next))
             return true;
-        } else if (indegree[next] == 1)
+        } else if (topStatuses[next] == 1)
           return true;    
       }
       orderStack.push_back(top);
-      indegree[top] = 2;
+      topStatuses[top] = 2;
       return false;
     }
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
         graph.resize(numCourses, vector<int>());
-        indegree.resize(numCourses, 0);
+        topStatuses.resize(numCourses, 0);
         int i;
         for (i = 0; i < prerequisites.size(); i++)
           graph[prerequisites[i][0]].push_back(prerequisites[i][1]);
         for (i = 0; i < numCourses; i++)
-          if (indegree[i] == 0)
+          if (topStatuses[i] == 0)
             if (DeepFirstSearch(i))
               return vector<int>(0);
         return orderStack;
@@ -90,21 +90,21 @@ https://www.lintcode.com/problem/alien-dictionary/description
 class Solution {
 private:
     vector<vector<int>> graph;
-    vector<int> indegree;
+    vector<int> topStatuses;
     string orderStack;
 public:
     bool DeepFirstSearch(int top) {
-      indegree[top] = 1;
+      topStatuses[top] = 1;
       for (int i = 0; i < graph[top].size(); i++) {
         int next = graph[top][i];
-        if (indegree[next] == 0) {
+        if (topStatuses[next] == 0) {
           if (DeepFirstSearch(next))
             return true;
-        } else if (indegree[next] == 1)
+        } else if (topStatuses[next] == 1)
           return true;    
       }
       orderStack.push_back(top + 'a');
-      indegree[top] = 2;
+      topStatuses[top] = 2;
       return false;
     }
     void BuidGraph(vector<string>& words) {
@@ -113,7 +113,7 @@ public:
         for (i = 0; i < words.size(); i++) {
             isEdgeBuilt = (i == words.size() - 1);
             for (j = 0; j < words[i].size(); j++) {
-              indegree[words[i][j] - 'a'] = 0;
+              topStatuses[words[i][j] - 'a'] = 0;
               if (!isEdgeBuilt && words[i][j] != words[i + 1][j]) {
                 graph[words[i][j] - 'a'].push_back(words[i + 1][j] - 'a');
                 isEdgeBuilt = true;
@@ -143,16 +143,16 @@ public:
     }
     string alienOrder(vector<string> &words) {
         graph.resize(26, vector<int>());
-        indegree.resize(26, -1);
+        topStatuses.resize(26, -1);
         int i;
         BuidGraph(words);
         for (i = 0; i < 26; i++)
-          if (graph[i].size() && indegree[i] == 0)
+          if (graph[i].size() && topStatuses[i] == 0)
             if (DeepFirstSearch(i))
               return string();
         orderStack = ReverseStr(orderStack);
         for (i = 0; i < 26; i++)
-          if (indegree[i] == 0) {
+          if (topStatuses[i] == 0) {
              size_t index = BinarySearch(orderStack, i + 'a');
              orderStack.insert(index + orderStack.begin(), i + 'a');
           }
