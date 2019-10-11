@@ -83,7 +83,7 @@ public:
         if ((searchIter = subArrMap.find(currentSum)) != sums.end())
           searchIter->second++;
         else
-          sums.insert(pair<int, int>(currentSum, 1));
+          subArrMap.insert(pair<int, int>(currentSum, 1));
       }
       return count;
     }
