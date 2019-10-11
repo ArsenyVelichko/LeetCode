@@ -33,3 +33,19 @@ public:
 ### Recursively
 
 ```C++
+class Solution {
+public:
+    void RecursiveTraversal(TreeNode* node, vector<int>& res) {
+      if (node) {
+        RecursiveTraversal(node->left, res);
+        res.push_back(node->val);
+        RecursiveTraversal(node->right, res);
+      }
+    }
+    vector<int> inorderTraversal(TreeNode* root) {
+      vector<int> res(0);
+      RecursiveTraversal(root, res);
+      return res;
+    }
+};
+```
