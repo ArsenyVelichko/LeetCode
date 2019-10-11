@@ -6,6 +6,7 @@
 + [Same Tree](#same-tree)
 + [Invert Binary Tree](#invert-binary-tree)
 + [Path Sum](#path-sum)
++ [Subtree of Another Tree](#subtree-of-another-tree)
 
 ## Binary Tree Inorder Traversal
 
@@ -151,6 +152,35 @@ public:
           return true;
       }
       return false;
+    }
+};
+```
+
+## Subtree of Another Tree
+
+https://leetcode.com/problems/subtree-of-another-tree/submissions/
+
+```C++
+class Solution {
+public:
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        if (!p && !q)
+          return true;
+        if (!p || !q)
+          return false;
+        return (p->val == q->val) &&
+          isSameTree(p->left, q->left) &&
+          isSameTree(p->right, q->right);
+    }
+    bool isSubtree(TreeNode* s, TreeNode* t) {
+       if (!s)
+         return false;
+       if (isSameTree(s, t))
+         return true;
+       if(!isSubtree(s->left, t))
+         return isSubtree(s->right, t);
+       else
+         return true;
     }
 };
 ```
