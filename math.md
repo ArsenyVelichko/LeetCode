@@ -49,7 +49,7 @@ public:
         return N;
       if (cache[N] != 0)
         return cache[N];      
-      return cache[N] = fib(N - 1) + fib(N - 2);  
+      return cache[N] = SearchFibNumber(N - 1) + SearchFibNumber(N - 2);  
     }
     int fib(int N) {
       cache.resize(N + 1, 0);
