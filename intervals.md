@@ -7,11 +7,11 @@
 ## Non-overlapping Intervals
 
 ```C++
-bool CompareIntervalBegins(vector<int>& a, vector<int>& b) {
-       return (a[0] < b[0]);
-}
 class Solution {
-public:    
+public: 
+    static bool CompareIntervalBegins(vector<int>& a, vector<int>& b) {
+       return (a[0] < b[0]);
+    }
     int eraseOverlapIntervals(vector<vector<int>>& intervals) {
         if (intervals.size() == 0)
           return intervals.size();
@@ -36,11 +36,11 @@ public:
 https://leetcode.com/problems/merge-intervals/
 
 ```C++
-bool CompareIntervalBegins(vector<int>& a, vector<int>& b) {
-       return (a[0] < b[0]);
-}
 class Solution {
 public:
+    static bool CompareIntervalBegins(vector<int>& a, vector<int>& b) {
+       return (a[0] < b[0]);
+    }
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
         if (intervals.size() == 0)
           return intervals;
