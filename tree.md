@@ -10,6 +10,7 @@
 + [Binary Tree Level Order Traversal](#binary-tree-level-order-traversal)
 + [Kth Smallest Element in a BST](#kth-smallest-element-in-a-bst)
 + [Validate Binary Search Tree](#validate-binary-search-tree)
++ [Binary Search Tree Iterator](#binary-search-tree-iterator)
 
 ## Binary Tree Inorder Traversal
 
@@ -307,6 +308,35 @@ public:
     }
     bool isValidBST(TreeNode* root) {  
       return CheckBST(root, NULL, NULL);
+    }
+};
+```
+
+## Binary Search Tree Iterator
+
+https://leetcode.com/problems/binary-search-tree-iterator/
+
+```C++
+class BSTIterator {
+    stack<TreeNode*> treeTops;
+    void PutLeftOrderIn(TreeNode* root) {
+      while (root) {
+        treeTops.push(root);
+        root = root->left;
+      }
+    }
+public:   
+    BSTIterator(TreeNode* root) {
+      PutLeftOrderIn(root);
+    }
+    int next() {
+      TreeNode* currentNode = treeTops.top();
+      treeTops.pop();
+      PutLeftOrderIn(currentNode->right);
+      return currentNode->val;
+    }
+    bool hasNext() {
+      return !treeTops.empty();
     }
 };
 ```
