@@ -8,6 +8,7 @@
 + [Path Sum](#path-sum)
 + [Subtree of Another Tree](#subtree-of-another-tree)
 + [Binary Tree Level Order Traversal](#binary-tree-level-order-traversal)
++ [Kth Smallest Element in a BST](#kth-smallest-element-in-a-bst)
 
 ## Binary Tree Inorder Traversal
 
@@ -186,7 +187,7 @@ public:
 };
 ```
 
-# Binary Tree Level Order Traversal
+## Binary Tree Level Order Traversal
 
 https://leetcode.com/problems/binary-tree-level-order-traversal/
 
@@ -209,3 +210,26 @@ public:
     }
 };
 ```
+
+## Kth Smallest Element in a BST
+
+https://leetcode.com/problems/kth-smallest-element-in-a-bst/
+
+### Recursively
+
+```C++
+class Solution {
+public:
+    void RecursiveTraversal(TreeNode* node, vector<int>& res) {
+      if (node) {
+        RecursiveTraversal(node->left, res);
+        res.push_back(node->val);
+        RecursiveTraversal(node->right, res);
+      }
+    }
+    int kthSmallest(TreeNode* root, int k) {
+        vector<int> res(0);
+        RecursiveTraversal(root, res);
+        return res[k - 1];
+    }
+};
