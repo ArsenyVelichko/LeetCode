@@ -290,3 +290,23 @@ public:
     }
 };
 ```
+
+### Recursively
+
+```C++
+class Solution {
+public:
+    bool CheckBST(TreeNode* node, const int* lowerBound, const int* upperBound) {
+      if (!node)
+        return true;
+      if (lowerBound && node->val <= *lowerBound ||
+          upperBound && node->val >= *upperBound) 
+        return false;
+      return CheckBST(node->left, lowerBound, &node->val) &&
+             CheckBST(node->right, &node->val, upperBound);
+    }
+    bool isValidBST(TreeNode* root) {  
+      return CheckBST(root, NULL, NULL);
+    }
+};
+```
