@@ -9,6 +9,7 @@
 + [Subtree of Another Tree](#subtree-of-another-tree)
 + [Binary Tree Level Order Traversal](#binary-tree-level-order-traversal)
 + [Kth Smallest Element in a BST](#kth-smallest-element-in-a-bst)
++ [Validate Binary Search Tree](#validate-binary-search-tree)
 
 ## Binary Tree Inorder Traversal
 
@@ -255,6 +256,37 @@ public:
           currentNode = currentNode->right;
         }
         return res;
+    }
+};
+```
+
+## Validate Binary Search Tree
+
+https://leetcode.com/problems/validate-binary-search-tree/
+
+### Iteratively
+```C++
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        TreeNode* currentNode = root;
+        stack<TreeNode*> treeTops;
+        double first = -1.0 / 0;
+        int second;
+        while (currentNode != NULL || !treeTops.empty()) {
+          while (currentNode) {
+            treeTops.push(currentNode);
+            currentNode = currentNode->left;
+          }
+          currentNode = treeTops.top();
+          treeTops.pop();
+          second = currentNode->val;
+          if (first >= second)
+            return false;
+          first = second;
+          currentNode = currentNode->right;
+        }
+      return true;
     }
 };
 ```
