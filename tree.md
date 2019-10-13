@@ -11,6 +11,7 @@
 + [Kth Smallest Element in a BST](#kth-smallest-element-in-a-bst)
 + [Validate Binary Search Tree](#validate-binary-search-tree)
 + [Binary Search Tree Iterator](#binary-search-tree-iterator)
++ [Inorder Successor in BST](#inorder-successor-in-bst)
 
 ## Binary Tree Inorder Traversal
 
@@ -340,3 +341,29 @@ public:
     }
 };
 ```
+
+## Inorder Successor in BST
+
+https://www.lintcode.com/problem/inorder-successor-in-bst/
+
+class Solution {
+public:
+    TreeNode * inorderSuccessor(TreeNode * root, TreeNode * p) {
+        TreeNode* prevNode = NULL;
+        if (!root)
+          return root;
+        while (root->val != p->val) {
+          if (root->val > p->val) {
+            prevNode = root;
+            root = root->left;
+          } else
+            root = root->right;
+        }
+        root = root->right;
+        while (root) {
+           prevNode = root;
+           root = root->left;
+        } 
+        return prevNode;
+    }
+};
