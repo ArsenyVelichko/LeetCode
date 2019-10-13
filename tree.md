@@ -233,3 +233,28 @@ public:
         return res[k - 1];
     }
 };
+```
+
+### Iteratively
+
+```C++
+class Solution {
+public:
+    int kthSmallest(TreeNode* root, int k) {
+        int res;
+        stack<TreeNode*> treeTops;
+        TreeNode* currentNode = root;
+        while (k--) {
+          while (currentNode) {
+            treeTops.push(currentNode);
+            currentNode = currentNode->left;
+          }
+          currentNode = treeTops.top();
+          treeTops.pop();
+          res = currentNode->val;
+          currentNode = currentNode->right;
+        }
+        return res;
+    }
+};
+```
