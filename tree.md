@@ -346,6 +346,7 @@ public:
 
 https://www.lintcode.com/problem/inorder-successor-in-bst/
 
+```C++
 class Solution {
 public:
     TreeNode * inorderSuccessor(TreeNode * root, TreeNode * p) {
@@ -367,3 +368,4 @@ public:
         return prevNode;
     }
 };
+```
