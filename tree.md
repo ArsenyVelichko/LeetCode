@@ -12,6 +12,7 @@
 + [Validate Binary Search Tree](#validate-binary-search-tree)
 + [Binary Search Tree Iterator](#binary-search-tree-iterator)
 + [Inorder Successor in BST](#inorder-successor-in-bst)
++ [Lowest Common Ancestor of a Binary Search Tree](#lowest-common-ancestor-of-a-binary-search-tree)
 
 ## Binary Tree Inorder Traversal
 
@@ -366,6 +367,35 @@ public:
            root = root->left;
         } 
         return prevNode;
+    }
+};
+```
+
+## Lowest Common Ancestor of a Binary Search Tree
+
+https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
+
+```C++
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+      int leftBound, rightBound;
+      if (p->val > q->val) {
+        leftBound = q->val;
+        rightBound = p->val;
+      } else {
+        leftBound = p->val;
+        rightBound = q->val;
+      }
+      while (root) {
+        if (root->val > rightBound)
+          root = root->left;
+        else if (root->val < leftBound)
+          root = root->right;
+        else
+          break;
+      } 
+      return root;
     }
 };
 ```
