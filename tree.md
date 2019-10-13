@@ -7,6 +7,7 @@
 + [Invert Binary Tree](#invert-binary-tree)
 + [Path Sum](#path-sum)
 + [Subtree of Another Tree](#subtree-of-another-tree)
++ [Binary Tree Level Order Traversal](#binary-tree-level-order-traversal)
 
 ## Binary Tree Inorder Traversal
 
@@ -181,6 +182,30 @@ public:
          return isSubtree(s->right, t);
        else
          return true;
+    }
+};
+```
+
+# Binary Tree Level Order Traversal
+
+https://leetcode.com/problems/binary-tree-level-order-traversal/
+
+```C++
+class Solution {
+public:
+    void LevelTraversal(TreeNode* root, vector<vector<int>>& levelOrder, int level) {
+      if (root) {
+        if (level >= levelOrder.size())
+          levelOrder.resize(level + 1);
+        levelOrder[level].push_back(root->val);
+        LevelTraversal(root->left, levelOrder, level + 1);
+        LevelTraversal(root->right, levelOrder, level + 1);
+      }
+    }
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> res(0);
+        LevelTraversal(root, res, 0);
+        return res;
     }
 };
 ```
