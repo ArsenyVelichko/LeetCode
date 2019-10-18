@@ -1,6 +1,7 @@
 # Dynamic programming
 
 + [Longest Increasing Subsequence](#longest-increasing-subsequence)
++ [Coin Change](#coin-change)
 
 ## Longest Increasing Subsequence
 
@@ -37,6 +38,27 @@ public:
           yTable[BinarySearch(yTable, nums[i], currTSize)] = nums[i];         
       }
       return currTSize;
+    }
+};
+```
+
+## Coin Change
+
+https://leetcode.com/problems/coin-change/
+
+```C++
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+      vector<int> minCoinsN(amount + 1, amount + 1);
+      minCoinsN[0] = 0;
+      for (int i = 0; i < coins.size(); i++) {
+        for (int j = 1; j <= amount; j++) {
+          if (coins[i] <= j)
+            minCoinsN[j] = min(minCoinsN[j], minCoinsN[j - coins[i]] + 1);
+        }
+      }
+      return minCoinsN[amount] > amount ? -1 : minCoinsN[amount];
     }
 };
 ```
