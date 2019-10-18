@@ -2,6 +2,7 @@
 
 + [Longest Increasing Subsequence](#longest-increasing-subsequence)
 + [Coin Change](#coin-change)
++ [Coin Change 2](#coin-change-2)
 
 ## Longest Increasing Subsequence
 
@@ -53,12 +54,31 @@ public:
       vector<int> minCoinsN(amount + 1, amount + 1);
       minCoinsN[0] = 0;
       for (int i = 0; i < coins.size(); i++) {
-        for (int j = 1; j <= amount; j++) {
-          if (coins[i] <= j)
-            minCoinsN[j] = min(minCoinsN[j], minCoinsN[j - coins[i]] + 1);
+        for (int j = coins[i]; j <= amount; j++) {
+          minCoinsN[j] = min(minCoinsN[j], minCoinsN[j - coins[i]] + 1);
         }
       }
       return minCoinsN[amount] > amount ? -1 : minCoinsN[amount];
+    }
+};
+```
+
+## Coin Change 2
+
+https://leetcode.com/problems/coin-change-2/
+
+```C++
+class Solution {
+public:
+    int change(int amount, vector<int>& coins) {
+      vector<int> minCoinsN(amount + 1, 0);
+      minCoinsN[0] = 1;
+      for (int i = 0; i < coins.size(); i++) {
+        for (int j = coins[i]; j <= amount; j++) {
+          minCoinsN[j] += minCoinsN[j - coins[i]];
+        }
+      }
+      return minCoinsN[amount];
     }
 };
 ```
