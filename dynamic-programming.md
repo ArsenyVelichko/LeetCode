@@ -1,9 +1,9 @@
 # Dynamic programming
 
++ [Climbing Stairs](#climbing-stairs)
 + [Longest Increasing Subsequence](#longest-increasing-subsequence)
 + [Coin Change](#coin-change)
 + [Coin Change 2](#coin-change-2)
-+ [Climbing Stairs](#climbing-stairs)
 
 ## Climbing Stairs
 
