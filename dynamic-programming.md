@@ -3,6 +3,34 @@
 + [Longest Increasing Subsequence](#longest-increasing-subsequence)
 + [Coin Change](#coin-change)
 + [Coin Change 2](#coin-change-2)
++ [Climbing Stairs](#climbing-stairs)
+
+## Climbing Stairs
+
+https://leetcode.com/problems/climbing-stairs/
+
+```C++
+class Solution {
+public:
+    int climbStairs(int n) {
+      int prev = 0, curr = 1;
+      long int matrixElem1 = 0, matrixElem2 = 1;
+      while (n) {
+        int buf = prev;
+        if (n & 1) {
+          prev = matrixElem1 * prev + matrixElem2 * curr;
+          curr = matrixElem2 * (buf + curr) + matrixElem1 * curr;
+        }
+        long int square2 = matrixElem2 * matrixElem2;
+        buf = matrixElem1;
+        matrixElem1 = matrixElem1 * matrixElem1 + square2;
+        matrixElem2 = 2 * buf * matrixElem2 + square2;       
+        n /= 2;
+      }
+      return curr;
+    }
+};
+```
 
 ## Longest Increasing Subsequence
 
