@@ -5,6 +5,8 @@
 + [Coin Change](#coin-change)
 + [Coin Change 2](#coin-change-2)
 + [House Robber](#house-robber)
++ [Jump Game](#jump-game)
++ [Jump Game II](#jump-game-ii)
 
 ## Climbing Stairs
 
@@ -127,6 +129,46 @@ public:
         curr = tmp;
       }
       return curr;
+    }
+};
+```
+
+## Jump Game
+
+https://leetcode.com/problems/jump-game/
+
+```C++
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+      int lowerBound = nums.size() - 1;
+      for (int i = nums.size() - 1; i >= 0; i--) {
+        if (i + nums[i] >= lowerBound)
+          lowerBound = i;
+      }
+      return lowerBound == 0;
+    }
+};
+```
+
+## Jump Game II
+
+https://leetcode.com/problems/jump-game-ii/
+
+```C++
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+      int res = 0, currEnd = 0;
+      int maxJump = 0;
+      for (int i = 0; i < nums.size() - 1; i++) {     
+        maxJump = max(maxJump, i + nums[i]);
+        if (i == currEnd) {
+          res++;
+          currEnd = maxJump;
+        }
+      }
+      return res;     
     }
 };
 ```
