@@ -7,6 +7,7 @@
 + [House Robber](#house-robber)
 + [Jump Game](#jump-game)
 + [Jump Game II](#jump-game-ii)
++ [Decode Ways](#decode-ways)
 
 ## Climbing Stairs
 
@@ -170,5 +171,29 @@ public:
       }
       return res;     
     }
+};
+```
+
+## Decode Ways
+
+https://leetcode.com/problems/decode-ways/
+
+```C++
+class Solution {
+public:
+    int numDecodings(string s) {
+      int prev = 0, curr = 1;
+      for (int i = 0; i < s.length(); i++) {  
+        if (s[i] == '0')
+          curr = 0;
+        int tmp = curr + prev;        
+        if (s[i] == '1' || s[i] == '2' && s[i + 1] <= '6' && s[i + 1] >= '0')  
+          prev = curr;         
+        else
+          prev = 0;
+        curr = tmp;
+      }
+      return curr;
+    }  
 };
 ```
