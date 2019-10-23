@@ -8,6 +8,7 @@
 + [Jump Game](#jump-game)
 + [Jump Game II](#jump-game-ii)
 + [Decode Ways](#decode-ways)
++ [Unique Paths](#unique-paths)
 
 ## Climbing Stairs
 
@@ -195,5 +196,27 @@ public:
       }
       return curr;
     }  
+};
+```
+
+## Unique Paths
+
+https://leetcode.com/problems/unique-paths/
+
+```C++
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+      vector<vector<int>> countMap(n, vector(m, 0));
+      countMap[0][0] = 1;
+      for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++) {
+          if (i != 0)
+            countMap[i][j] += countMap[i - 1][j];
+          if (j != 0)
+            countMap[i][j] += countMap[i][j - 1];
+        }
+      return countMap[n - 1][m - 1];
+    }
 };
 ```
