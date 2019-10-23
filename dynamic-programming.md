@@ -183,7 +183,7 @@ class Solution {
 public:
     int numDecodings(string s) {
       int prev = 0, curr = 1;
-      for (int i = 0; i < s.length() - 1; i++) {  
+      for (int i = 0; i < s.length(); i++) {  
         if (s[i] == '0')
           curr = 0;
         int tmp = curr + prev;        
@@ -193,9 +193,7 @@ public:
           prev = 0;
         curr = tmp;
       }
-      if (s[s.length() - 1] == '0')
-          curr = 0;
-      return curr + prev;
+      return curr;
     }  
 };
 ```
