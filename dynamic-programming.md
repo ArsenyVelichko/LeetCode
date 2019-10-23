@@ -183,17 +183,19 @@ class Solution {
 public:
     int numDecodings(string s) {
       int prev = 0, curr = 1;
-      for (int i = 0; i < s.length(); i++) {  
+      for (int i = 0; i < s.length() - 1; i++) {  
         if (s[i] == '0')
           curr = 0;
         int tmp = curr + prev;        
-        if (s[i] == '1' || s[i] == '2' && s[i + 1] <= '6' && s[i + 1] >= '0')  
+        if (s[i] == '1' || s[i] == '2' && s[i + 1] <= '6')  
           prev = curr;         
         else
           prev = 0;
         curr = tmp;
       }
-      return curr;
+      if (s[s.length() - 1] == '0')
+          curr = 0;
+      return curr + prev;
     }  
 };
 ```
