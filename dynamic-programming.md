@@ -10,6 +10,7 @@
 + [Decode Ways](#decode-ways)
 + [Unique Paths](#unique-paths)
 + [Unique Paths II](#unique-paths-ii)
++ [Longest Common Subsequence](#longest-common-subsequence)
 
 ## Climbing Stairs
 
@@ -246,6 +247,35 @@ public:
             countMap[i][j]--;
         }
       return countMap.back().back();
+    }
+};
+```
+
+## Longest Common Subsequence
+
+https://leetcode.com/problems/longest-common-subsequence/
+
+```C++
+class Solution {
+public:
+    int longestCommonSubsequence(string text1, string text2) {
+      if (text1.size() < text2.size())
+        swap(text1, text2);
+      int len1 = text1.size();
+      int len2 = text2.size();
+      int lcs[len2 + 1] = {0};
+      for (int i = 0; i < len1; i++) {
+        int prev = lcs[0];
+        for (int j = 1; j <= len2; j++) {
+          int curr = lcs[j];
+          if (text1[i] == text2[j - 1])
+            lcs[j] = prev + 1;
+          else
+            lcs[j] = max(lcs[j], lcs[j - 1]);
+          prev = curr;
+        }
+      }
+      return lcs[len2];
     }
 };
 ```
