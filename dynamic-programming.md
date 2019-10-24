@@ -11,6 +11,7 @@
 + [Unique Paths](#unique-paths)
 + [Unique Paths II](#unique-paths-ii)
 + [Longest Common Subsequence](#longest-common-subsequence)
++ [Word Break](#word-break)
 
 ## Climbing Stairs
 
@@ -276,6 +277,46 @@ public:
         }
       }
       return lcs[len2];
+    }
+};
+```
+
+## Word Break
+
+https://leetcode.com/problems/word-break/
+
+```C++
+class Solution {
+  vector<vector<int>> graph;
+  vector<int> memo;
+public: 
+    bool SearchBottom(int depth) {
+      if (depth == 0)
+        return true;
+      memo[depth] = 1;
+      for (int i = 0; i < graph[depth].size(); i++) {
+        int next = graph[depth][i];
+        if (memo[next] != 0)
+          continue;
+        if (SearchBottom(next))
+          return true;
+      }
+      return false;
+    }
+    bool wordBreak(string s, vector<string>& wordDict) {
+      graph.resize(s.size() + 1, vector<int>());
+      memo.resize(s.size() + 1, 0);
+       for (int i = 0; i < wordDict.size(); i++) {
+         for (int j = 0; j < s.size(); j++) {
+           int k;
+           for (k = 0; k < wordDict[i].size(); k++)
+             if (wordDict[i][k] != s[k + j])
+               break;
+           if (k == wordDict[i].size())
+             graph[j + k].push_back(j);
+         }
+       }
+       return SearchBottom(s.size());
     }
 };
 ```
