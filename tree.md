@@ -153,10 +153,8 @@ public:
       if (root) {
         if (!root->left && !root->right && sum - root->val == 0)
           return true;
-        else if (!hasPathSum(root->left, sum - root->val))
-          return hasPathSum(root->right, sum - root->val);
-        else
-          return true;
+        return hasPathSum(root->left, sum - root->val) ||
+                 hasPathSum(root->right, sum - root->val);
       }
       return false;
     }
@@ -184,10 +182,7 @@ public:
          return false;
        if (isSameTree(s, t))
          return true;
-       if(!isSubtree(s->left, t))
-         return isSubtree(s->right, t);
-       else
-         return true;
+       return isSubtree(s->left, t) || isSubtree(s->right, t);
     }
 };
 ```
