@@ -400,7 +400,7 @@ https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
 ```C++
 class Solution {
 private:
-  int PtrsFound;
+  int ptrsFound;
   TreeNode* resAnc;
 public:
     int FindTwoNodes(TreeNode* root, TreeNode* p, TreeNode* q) {
@@ -408,10 +408,10 @@ public:
       if (!root)
         return 0;
       if (root == p || root == q) {
-        PtrsFound++;
+        ptrsFound++;
         currentRes = 1;
       }
-      if (PtrsFound < 2) {
+      if (ptrsFound < 2) {
          currentRes += FindTwoNodes(root->left, p, q) + FindTwoNodes(root->right, p, q);
          if (currentRes == 2) {
              resAnc = root;
