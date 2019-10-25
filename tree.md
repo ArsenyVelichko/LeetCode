@@ -94,13 +94,9 @@ https://leetcode.com/problems/maximum-depth-of-binary-tree/
 ```C++
 class Solution {
 public:
-    int SearchBottom(TreeNode* node, int depth) {
-      if (!node)
-        return depth;
-      return max(SearchBottom(node->left, depth + 1), SearchBottom(node->right, depth + 1));
-    }
     int maxDepth(TreeNode* root) {
-        return SearchBottom(root, 0);
+        return root == NULL ? 0 : 
+          max(maxDepth(root->left), maxDepth(root->right)) + 1;
     }
 };
 ```
