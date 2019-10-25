@@ -12,6 +12,8 @@
 + [Unique Paths II](#unique-paths-ii)
 + [Longest Common Subsequence](#longest-common-subsequence)
 + [Word Break](#word-break)
++ [N-Queens](#n-queens)
++ [N-Queens II](#n-queens-ii)
 
 ## Climbing Stairs
 
@@ -317,6 +319,88 @@ public:
          }
        }
        return SearchBottom(s.size());
+    }
+};
+```
+
+## N-Queens
+
+https://leetcode.com/problems/n-queens/
+
+```C++
+class Solution {
+private:
+    vector<vector<string>> res;
+    vector<char> markedRow;
+    vector<char> markedRDiag;
+    vector<char> markedLDiag;
+public:
+    void SearchSolution(int column, int n, vector<string>& currRes) {
+      if (column == n)
+        res.push_back(currRes);
+      else {
+        for (int row = 0; row < n; row++) {
+          if (!markedRow[row] && !markedRDiag[row + column]
+             && !markedLDiag[column - row + n - 1]) {
+            currRes[row][column] = 'Q';
+            markedRow[row] = markedRDiag[row + column]
+              = markedLDiag[column - row + n - 1] = 1;
+            SearchSolution(column + 1, n, currRes);
+            currRes[row][column] = '.';
+            markedRow[row] = markedRDiag[row + column]
+              = markedLDiag[column - row + n - 1] = 0;
+          }
+        }
+      }
+    }
+    vector<vector<string>> solveNQueens(int n) {
+      vector<string> currRes(n, string (n, '.'));
+      markedRow.resize(n, 0);
+      markedRDiag.resize(2 * n - 1, 0);
+      markedLDiag.resize(2 * n - 1, 0);
+      SearchSolution(0, n, currRes);
+      return res;
+    }
+};
+```
+
+## N-Queens II
+
+https://leetcode.com/problems/n-queens-ii/
+
+```C++
+class Solution {
+private:
+    int res;
+    vector<char> markedRow;
+    vector<char> markedRDiag;
+    vector<char> markedLDiag;
+public:
+    void SearchSolution(int column, int n, vector<string>& currRes) {
+      if (column == n)
+        res++;
+      else {
+        for (int row = 0; row < n; row++) {
+          if (!markedRow[row] && !markedRDiag[row + column]
+             && !markedLDiag[column - row + n - 1]) {
+            currRes[row][column] = 'Q';
+            markedRow[row] = markedRDiag[row + column]
+              = markedLDiag[column - row + n - 1] = 1;
+            SearchSolution(column + 1, n, currRes);
+            currRes[row][column] = '.';
+            markedRow[row] = markedRDiag[row + column]
+              = markedLDiag[column - row + n - 1] = 0;
+          }
+        }
+      }
+    }
+    int totalNQueens(int n) {
+      vector<string> currRes(n, string (n, '.'));
+      markedRow.resize(n, 0);
+      markedRDiag.resize(2 * n - 1, 0);
+      markedLDiag.resize(2 * n - 1, 0);
+      SearchSolution(0, n, currRes);
+      return res;
     }
 };
 ```
