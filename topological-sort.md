@@ -144,7 +144,7 @@ public:
               return string();
         for (i = 0; i < 26; i++)
           if (topStatuses[i] == 0) {
-             size_t index = BinarySearch(orderStack, i + 'a');
+             size_t index = BinarySearch(orderStr, i + 'a');
              orderStr.insert(index + orderStr.begin(), i + 'a');
           }
         return orderStr;
