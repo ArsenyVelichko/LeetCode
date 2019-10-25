@@ -51,7 +51,7 @@ class Solution {
 private:
   vector<vector<int>> graph;
   vector<int> topStatuses;
-  vector<int> orderStack;
+  vector<int> orderArr;
 public:
     bool DeepFirstSearch(int top) {
       topStatuses[top] = 1;
@@ -91,7 +91,7 @@ class Solution {
 private:
     vector<vector<int>> graph;
     vector<int> topStatuses;
-    string orderStack;
+    string orderStr;
 public:
     bool DeepFirstSearch(int top) {
       topStatuses[top] = 1;
