@@ -350,6 +350,12 @@ public:
         TreeNode* prevNode = NULL;
         if (!root)
           return root;
+        if (p->right) {
+          prevNode = p->right;
+          while (prevNode->left)
+            prevNode = prevNode->left;
+          return prevNode;
+        }
         while (root->val != p->val) {
           if (root->val > p->val) {
             prevNode = root;
@@ -357,11 +363,6 @@ public:
           } else
             root = root->right;
         }
-        root = root->right;
-        while (root) {
-           prevNode = root;
-           root = root->left;
-        } 
         return prevNode;
     }
 };
