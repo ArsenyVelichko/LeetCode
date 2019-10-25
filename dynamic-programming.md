@@ -283,24 +283,23 @@ https://leetcode.com/problems/unique-paths-ii/
 class Solution {
 public:
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
-      vector<vector<long int>> countMap(obstacleGrid.size(), vector<long int> (obstacleGrid[0].size()));
       if (obstacleGrid[0][0] == 1)
         return 0;
-      obstacleGrid[0][0] = 2;
-      for (int i = 0; i < countMap.size(); i++)
-        for (int j = 0; j < countMap[0].size(); j++) {
-          countMap[i][j] = obstacleGrid[i][j];
-          if (countMap[i][j] == 0) {
-            if (i != 0)
-              countMap[i][j] += countMap[i - 1][j];
+      int height = obstacleGrid.size();
+      int width = obstacleGrid[0].size();
+      vector<long> countMap(width);
+      countMap[0] = 1;
+      for(int i = 0 ; i < height; i++)
+        for(int j = 0 ; j < width; j++) {
+          if(!obstacleGrid[i][j]) {
             if (j != 0)
-              countMap[i][j] += countMap[i][j - 1];
+              countMap[j] += countMap[j - 1];
           } else
-            countMap[i][j]--;
+            countMap[j] = 0;
         }
-      return countMap.back().back();
+        return countMap[width - 1];
     }
-};
+}; 
 ```
 
 ## Longest Common Subsequence
