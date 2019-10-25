@@ -5,6 +5,7 @@
 + [Coin Change](#coin-change)
 + [Coin Change 2](#coin-change-2)
 + [House Robber](#house-robber)
++ [House Robber II](#house-robber-ii)
 + [Jump Game](#jump-game)
 + [Jump Game II](#jump-game-ii)
 + [Decode Ways](#decode-ways)
@@ -136,6 +137,30 @@ public:
         curr = tmp;
       }
       return curr;
+    }
+};
+```
+
+## House Robber II
+
+https://leetcode.com/problems/house-robber-ii/
+
+```C++
+class Solution {
+public:
+    int MaxLoot(vector<int>& nums, int begin, int end) {
+      int curr = 0, prev = 0;
+      for (int i = begin; i < end; i++) {
+        int tmp = max(prev + nums[i], curr);
+        prev = curr;
+        curr = tmp;
+      }
+      return curr;
+    }
+    int rob(vector<int>& nums) {
+      if (nums.size() == 1)
+        return nums[0];
+      return max(MaxLoot(nums, 0, nums.size() - 1), MaxLoot(nums, 1, nums.size()));
     }
 };
 ```
