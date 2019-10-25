@@ -265,9 +265,8 @@ https://leetcode.com/problems/unique-paths/
 class Solution {
 public:
     int uniquePaths(int m, int n) {
-      vector<int> countMap(m);
-      countMap[0] = 1;
-      for (int i = 0; i < n; i++)
+      vector<int> countMap(m, 1);
+      for (int i = 1; i < n; i++)
         for (int j = 1; j < m; j++)
           countMap[j] += countMap[j - 1];       
       return countMap[m - 1];
