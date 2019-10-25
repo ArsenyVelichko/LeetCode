@@ -289,9 +289,9 @@ public:
       int width = obstacleGrid[0].size();
       vector<long> countMap(width);
       countMap[0] = 1;
-      for(int i = 0 ; i < height; i++)
-        for(int j = 0 ; j < width; j++) {
-          if(!obstacleGrid[i][j]) {
+      for (int i = 0 ; i < height; i++)
+        for (int j = 0 ; j < width; j++) {
+          if (!obstacleGrid[i][j]) {
             if (j != 0)
               countMap[j] += countMap[j - 1];
           } else
