@@ -63,7 +63,7 @@ public:
         } else if (topStatuses[next] == 1)
           return true;    
       }
-      orderStack.push_back(top);
+      orderArr.push_back(top);
       topStatuses[top] = 2;
       return false;
     }
@@ -77,7 +77,7 @@ public:
           if (topStatuses[i] == 0)
             if (DeepFirstSearch(i))
               return vector<int>(0);
-        return orderStack;
+        return orderArr;
     }
 };
 ```
@@ -103,7 +103,7 @@ public:
         } else if (topStatuses[next] == 1)
           return true;    
       }
-      orderStack.push_back(top + 'a');
+      orderStr.push_back(top + 'a');
       topStatuses[top] = 2;
       return false;
     }
@@ -145,9 +145,9 @@ public:
         for (i = 0; i < 26; i++)
           if (topStatuses[i] == 0) {
              size_t index = BinarySearch(orderStack, i + 'a');
-             orderStack.insert(index + orderStack.begin(), i + 'a');
+             orderStr.insert(index + orderStr.begin(), i + 'a');
           }
-        return orderStack;
+        return orderStr;
     }
 };
 ```
