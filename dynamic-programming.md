@@ -1,5 +1,6 @@
 # Dynamic programming
 
++ [Knapsack problem](#knapsack-problem)
 + [Climbing Stairs](#climbing-stairs)
 + [Longest Increasing Subsequence](#longest-increasing-subsequence)
 + [Coin Change](#coin-change)
@@ -15,6 +16,33 @@
 + [Word Break](#word-break)
 + [N-Queens](#n-queens)
 + [N-Queens II](#n-queens-ii)
+
+## Knapsack problem
+
+https://stepik.org/lesson/13259/step/5?unit=3444
+
+```C++
+#include <iostream>
+#include <vector>
+using namespace std;
+int main() {
+  int W, n;
+  cin >> W >> n;
+  vector<vector<int>> maxValue(n + 1, vector<int>(W + 1));
+  for (int i = 1; i <= n; i++) {
+    int num;
+    cin >> num;
+    for (int j = 1; j <= W; j++) {
+      if (num > j)
+        maxValue[i][j] = maxValue[i - 1][j];
+      else
+        maxValue[i][j] = max(maxValue[i - 1][j], maxValue[i - 1][j - num] + num);
+    }
+  }
+  cout << maxValue[n][W];
+  return 0;
+}
+```
 
 ## Climbing Stairs
 
