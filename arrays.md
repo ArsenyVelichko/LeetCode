@@ -3,6 +3,7 @@
 + [Two Sum](#two-sum)
 + [3Sum](#3sum)
 + [Subarray Sum Equals K](#subarray-sum-equals-k)
++ [Maximum Subarray](#maximum-subarray)
 
 ## Two Sum
 
@@ -87,5 +88,26 @@ public:
       }
       return count;
     }
+};
+```
+
+## Maximum Subarray
+
+https://leetcode.com/problems/maximum-subarray/
+
+```C++
+class Solution {
+ public:
+  int maxSubArray(vector<int>& nums) {
+    int currMaxSum = nums[0], res = nums[0];
+    for (int i = 1; i < nums.size(); i++) {
+      if (currMaxSum < 0)
+        currMaxSum = nums[i];
+      else
+        currMaxSum += nums[i];
+      res = max(res, currMaxSum);
+    }
+    return res;
+  }
 };
 ```
