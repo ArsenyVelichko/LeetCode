@@ -1,8 +1,12 @@
 # Strings
 
 1) [Generate Parentheses](#generate-parentheses)
+2 [Is Subsequence](#is-subsequence)
 
 ## Generate Parentheses
+
+https://leetcode.com/problems/generate-parentheses/
+
 ```C++
 class Solution {
  public:
@@ -17,6 +21,23 @@ class Solution {
             res.push_back("(" + left + ")" + right);
     }
     return res;
+  }
+};
+```
+
+## Is Subsequence
+
+https://leetcode.com/problems/is-subsequence/
+
+```C++
+class Solution {
+ public:
+  bool isSubsequence(string s, string t) {
+    int j = 0;
+    for (int i = 0; t[i] && s[j]; i++)
+      if (s[j] == t[i]) j++;
+    if (!s[j]) return true;
+    return false;
   }
 };
 ```
