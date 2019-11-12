@@ -1,6 +1,7 @@
 # Math
 
 + [Fibonacci Number](#fibonacci-number)
++ [Count Primes](#count-primes)
 
 ## Fibonacci Number
 
@@ -58,4 +59,25 @@ public:
 };
 ```
 
+## Count Primes
 
+https://leetcode.com/problems/count-primes/
+
+```C++
+class Solution {
+ public:
+  int countPrimes(int n) {
+    vector<int> isPrime(n, 1);
+    int res = 0;
+    int i;
+    for (i = 2; i * i < n; i++) {
+      if (!isPrime[i]) continue;
+      res++;
+      for (int j = i * i; j < n; j += i) isPrime[j] = 0;
+    }
+    for (int j = i; j < n; j++)
+      if (isPrime[j]) res++;
+    return res;
+  }
+};
+```
