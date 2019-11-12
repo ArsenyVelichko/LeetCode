@@ -1,6 +1,6 @@
 # Strings
 
-+[Generate Parentheses](#generate-parentheses)
++ [Generate Parentheses](#generate-parentheses)
 
 ## Generate Parentheses
 ```C++
