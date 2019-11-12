@@ -1,7 +1,28 @@
 # Strings
 
+2) [Longest Substring Without Repeating Characters](#longest-substring-without-repeating-characters)
 6) [Generate Parentheses](#generate-parentheses)
 10) [Is Subsequence](#is-subsequence)
+
+## Longest Substring Without Repeating Characters
+
+https://leetcode.com/problems/longest-substring-without-repeating-characters/
+
+```C++
+class Solution {
+ public:
+  int lengthOfLongestSubstring(string s) {
+    int res = 0;
+    vector<int> ASCIITable(128);
+    for (int i = 0, prevCut = 0; i < s.size(); i++) {
+      prevCut = max(prevCut, ASCIITable[s[i]]);
+      res = max(res, i - prevCut + 1);
+      ASCIITable[s[i]] = i + 1;
+    }
+    return res;
+  }
+};
+```
 
 ## Generate Parentheses
 
