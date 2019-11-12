@@ -1,7 +1,7 @@
 # Strings
 
 1) [Generate Parentheses](#generate-parentheses)
-2 [Is Subsequence](#is-subsequence)
+2) [Is Subsequence](#is-subsequence)
 
 ## Generate Parentheses
 
