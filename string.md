@@ -1,8 +1,9 @@
 # Strings
 
-2) [Longest Substring Without Repeating Characters](#longest-substring-without-repeating-characters)
-6) [Generate Parentheses](#generate-parentheses)
-10) [Is Subsequence](#is-subsequence)
++ [Longest Substring Without Repeating Characters](#longest-substring-without-repeating-characters)
++ [Generate Parentheses](#generate-parentheses)
++ [Is Subsequence](#is-subsequence)
++ [Valid Palindrome](#valid-palindrome)
 
 ## Longest Substring Without Repeating Characters
 
@@ -59,6 +60,31 @@ class Solution {
       if (s[j] == t[i]) j++;
     if (!s[j]) return true;
     return false;
+  }
+};
+```
+
+## Valid Palindrome
+
+https://leetcode.com/problems/valid-palindrome/
+
+```C++
+class Solution {
+ public:
+  bool isPalindrome(string s) {
+    for (int i = 0, j = s.size() - 1; i < j;) {
+      if (!isalnum(s[i]))
+        i++;
+      else if (!isalnum(s[j]))
+        j--;
+      else if (tolower(s[i]) != tolower(s[j]))
+        return false;
+      else {
+        i++;
+        j--;
+      }
+    }
+    return true;
   }
 };
 ```
