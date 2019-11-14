@@ -6,6 +6,7 @@
 + [Valid Palindrome](#valid-palindrome)
 + [Longest Palindromic Substring](#longest-palindromic-substring)
 + [Palindromic Substrings](#palindromic-substrings)
++ [Valid Parentheses](#valid-parentheses)
 
 ## Longest Substring Without Repeating Characters
 
@@ -179,6 +180,37 @@ class Solution {
       res += (P[i] + 1) / 2;
     }
     return res;
+  }
+};
+```
+
+
+## Valid Parentheses
+
+https://leetcode.com/problems/valid-parentheses/
+
+```C++
+class Solution {
+ public:
+  bool isValid(string s) {
+    stack<int> parOrder;
+    for (int i = 0; i < s.size(); i++) {
+      switch (s[i]) {
+        case '(':
+          parOrder.push(')');
+          break;
+        case '[':
+          parOrder.push(']');
+          break;
+        case '{':
+          parOrder.push('}');
+          break;
+        default:
+          if (parOrder.empty() || parOrder.top() != s[i]) return false;
+          parOrder.pop();
+      }
+    }
+    return parOrder.empty();
   }
 };
 ```
