@@ -106,10 +106,10 @@ class Solution {
     modifiedS.push_back('|');
     return modifiedS;
   }
-  string removeSeparators(string s, int leftBoind, int rightBound) {
+  string removeSeparators(string s, int leftBound, int rightBound) {
     string modifiedS;
-    for (int i = 0; i * 2 < rightBound - leftBoind; i++)
-      modifiedS.push_back(s[leftBoind + i * 2]);
+    for (int i = 0; i * 2 < rightBound - leftBound; i++)
+      modifiedS.push_back(s[leftBound + i * 2]);
     return modifiedS;
   }
   string longestPalindrome(string s) {
