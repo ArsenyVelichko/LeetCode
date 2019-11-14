@@ -224,9 +224,6 @@ https://leetcode.com/problems/group-anagrams/
 class Solution {
  public:
   vector<vector<string>> groupAnagrams(vector<string>& strs) {
-    if (strs.size() == 0) {
-      return vector(0, vector<string>());
-    }
     unordered_map<string, vector<string>> anagramMap;
     int alphabet[26] = {0};
     for (string currStr : strs) {
