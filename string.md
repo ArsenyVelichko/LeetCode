@@ -5,6 +5,7 @@
 + [Is Subsequence](#is-subsequence)
 + [Valid Palindrome](#valid-palindrome)
 + [Longest Palindromic Substring](#longest-palindromic-substring)
++ [Palindromic Substrings](#palindromic-substrings)
 
 ## Longest Substring Without Repeating Characters
 
@@ -135,6 +136,49 @@ class Solution {
       }
     }
     return removeSeparators(sepS, resC - P[resC] + 1, resC + P[resC]);
+  }
+};
+```
+
+## Palindromic Substrings
+
+https://leetcode.com/problems/palindromic-substrings/
+
+```C++
+class Solution {
+ public:
+  string addSeparators(string s) {
+    string modifiedS;
+    for (int i = 0; i < s.size(); i++) {
+      modifiedS.push_back('|');
+      modifiedS.push_back(s[i]);
+    }
+    modifiedS.push_back('|');
+    return modifiedS;
+  }
+  int countSubstrings(string s) {
+    int c = 0, r = 0;
+    int res = 0;
+    string sepS = addSeparators(s);
+    int size = sepS.size();
+    int P[sepS.size()] = {0};
+    for (int i = 0; i < size; i++) {
+      int mirror = 2 * c - i;
+      if (i < r) P[i] = min(r - i, P[mirror]);
+      int a = i - P[i] - 1;
+      int b = i + P[i] + 1;
+      while (a >= 0 && b < size && sepS[a] == sepS[b]) {
+        a--;
+        b++;
+        P[i]++;
+      }
+      if (i + P[i] > r) {
+        c = i;
+        r = i + P[i];
+      }
+      res += (P[i] + 1) / 2;
+    }
+    return res;
   }
 };
 ```
