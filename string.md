@@ -7,6 +7,7 @@
 + [Longest Palindromic Substring](#longest-palindromic-substring)
 + [Palindromic Substrings](#palindromic-substrings)
 + [Valid Parentheses](#valid-parentheses)
++ [Group Anagrams](#group-anagrams)
 
 ## Longest Substring Without Repeating Characters
 
@@ -214,3 +215,37 @@ class Solution {
   }
 };
 ```
+
+## Group Anagrams
+
+https://leetcode.com/problems/group-anagrams/
+
+```C++
+class Solution {
+ public:
+  vector<vector<string>> groupAnagrams(vector<string>& strs) {
+    if (strs.size() == 0) {
+      return vector(0, vector<string>());
+    }
+    unordered_map<string, vector<string>> anagramMap;
+    int alphabet[26] = {0};
+    for (string currStr : strs) {
+      for (char currChar : currStr) {
+        alphabet[currChar - 'a']++;
+      }
+      string key;
+      for (int i = 0; i < 26; i++) {
+        key.push_back('#');
+        key.push_back(alphabet[i]);
+        alphabet[i] = 0;
+      }
+      anagramMap[key].push_back(currStr);
+    }
+    vector<vector<string>> res;
+    for (auto mapElem : anagramMap) {
+      res.push_back(mapElem.second);
+    }
+    return res;
+  }
+};
+  ```
