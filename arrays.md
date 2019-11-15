@@ -4,6 +4,7 @@
 + [3Sum](#3sum)
 + [Subarray Sum Equals K](#subarray-sum-equals-k)
 + [Maximum Subarray](#maximum-subarray)
++ [Maximum Product Subarray](#maximum-product-subarray)
 
 ## Two Sum
 
@@ -106,6 +107,35 @@ class Solution {
       else
         currMaxSum += nums[i];
       res = max(res, currMaxSum);
+    }
+    return res;
+  }
+};
+```
+
+## Maximum Product Subarray
+
+https://leetcode.com/problems/maximum-product-subarray/
+
+```C++
+class Solution {
+ public:
+  int maxProduct(vector<int>& nums) {
+    int leftProduct = 0, rightProduct = 0;
+    int res = nums[0];
+    int size = nums.size();
+    for (int i = 0; i < size; i++) {
+      if (leftProduct != 0) {
+        leftProduct *= nums[i];
+      } else {
+        leftProduct = nums[i];
+      }
+      if (rightProduct != 0) {
+        rightProduct *= nums[size - i - 1];
+      } else {
+        rightProduct = nums[size - i - 1];
+      }
+      res = max(res, max(leftProduct, rightProduct));
     }
     return res;
   }
