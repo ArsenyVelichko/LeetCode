@@ -8,6 +8,7 @@
 + [Palindromic Substrings](#palindromic-substrings)
 + [Valid Parentheses](#valid-parentheses)
 + [Group Anagrams](#group-anagrams)
++ [Longest Repeating Character Replacement](#longest-repeating-character-replacement)
 
 ## Longest Substring Without Repeating Characters
 
@@ -246,3 +247,29 @@ class Solution {
   }
 };
   ```
+  
+## Longest Repeating Character Replacement
+
+https://leetcode.com/problems/longest-repeating-character-replacement/
+
+```C++
+class Solution {
+ public:
+  int characterReplacement(string s, int k) {
+    int alphabet[26] = {0};
+    int* currMax = alphabet;
+    int res = 0;
+    for (int begin = 0, end = 0; end < s.size(); end++) {
+      if (++alphabet[s[end] - 'A'] > *currMax) {
+        currMax = &alphabet[s[end] - 'A'];
+      }
+      if (end - begin >= k + *currMax) {
+        alphabet[s[begin] - 'A']--;
+        begin++;
+      }
+      res = max(res, end - begin + 1);
+    }
+    return res;
+  }
+};
+```
