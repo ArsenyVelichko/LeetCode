@@ -9,6 +9,7 @@
 + [Valid Parentheses](#valid-parentheses)
 + [Group Anagrams](#group-anagrams)
 + [Longest Repeating Character Replacement](#longest-repeating-character-replacement)
++ [Maximum Product Subarray](#maximum-product-subarray)
 
 ## Longest Substring Without Repeating Characters
 
@@ -268,6 +269,35 @@ class Solution {
         begin++;
       }
       res = max(res, end - begin + 1);
+    }
+    return res;
+  }
+};
+```
+
+## Maximum Product Subarray
+
+https://leetcode.com/problems/maximum-product-subarray/
+
+```C++
+class Solution {
+ public:
+  int maxProduct(vector<int>& nums) {
+    int leftProduct = 0, rightProduct = 0;
+    int res = nums[0];
+    int size = nums.size();
+    for (int i = 0; i < size; i++) {
+      if (leftProduct != 0) {
+        leftProduct *= nums[i];
+      } else {
+        leftProduct = nums[i];
+      }
+      if (rightProduct != 0) {
+        rightProduct *= nums[size - i - 1];
+      } else {
+        rightProduct = nums[size - i - 1];
+      }
+      res = max(res, max(leftProduct, rightProduct));
     }
     return res;
   }
