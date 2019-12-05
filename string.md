@@ -9,6 +9,7 @@
 + [Valid Parentheses](#valid-parentheses)
 + [Group Anagrams](#group-anagrams)
 + [Longest Repeating Character Replacement](#longest-repeating-character-replacement)
++ [Minimum Window Substring](#minimum-window-substring)
 
 ## Longest Substring Without Repeating Characters
 
@@ -271,5 +272,42 @@ class Solution {
     }
     return res;
   }
+};
+```
+
+## Minimum Window Substring
+
+https://leetcode.com/problems/minimum-window-substring/
+
+```C++
+class Solution {
+public:
+    string minWindow(string s, string t) {
+      map<char, int> tChars;
+      queue<pair<char, int>> foundChars;
+      int res[2], formed = 0;
+      res[1] = s.size();
+      for (int i = 0; i < t.size(); i++) {
+        tChars[t[i]]++;
+      }
+      for (int i = 0; i < s.size(); i++) {
+        if (tChars.find(s[i]) != tChars.end()) {
+          tChars[s[i]]--;
+          if (tChars[s[i]] == 0)
+            formed++;
+          foundChars.push(pair<char, int> (s[i], i));
+          while (tChars[foundChars.front().first] < 0) {
+            tChars[foundChars.front().first]++;
+            foundChars.pop();
+          }
+          if (formed == tChars.size() &&
+              foundChars.back().second - foundChars.front().second < res[1]) {
+            res[0] = foundChars.front().second;
+            res[1] = foundChars.back().second - foundChars.front().second;
+          }
+        }
+      }
+      return res[1] == s.size() ? "" : s.substr(res[0], res[1] + 1);
+    }
 };
 ```
